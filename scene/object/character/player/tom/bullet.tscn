@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://drru0goxrfq71"]
+
+[ext_resource type="Texture2D" uid="uid://bftceefvsipls" path="res://art/character/player/tom/bullet.png" id="1_hqdt4"]
+[ext_resource type="Script" path="res://scene/object/character/player/tom/TomBullet.cs" id="1_plfev"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_23wel"]
+radius = 7.0
+
+[node name="Bullet" type="Area2D"]
+script = ExtResource("1_plfev")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_hqdt4")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_23wel")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+position = Vector2(12, 0)
+scale = Vector2(0.7, 0.7)

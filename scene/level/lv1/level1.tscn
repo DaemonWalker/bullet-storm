@@ -1,0 +1,31 @@
+[gd_scene load_steps=5 format=3 uid="uid://jko6v843ljbb"]
+
+[ext_resource type="Script" path="res://scene/level/lv1/Level1.cs" id="1_lvmij"]
+[ext_resource type="PackedScene" uid="uid://5k85gkqt50ga" path="res://scene/object/character/player/tom/tom.tscn" id="2_p6h6n"]
+[ext_resource type="PackedScene" uid="uid://ccmyesf1kwphu" path="res://scene/object/character/enemy/fish/fish.tscn" id="2_yjl7h"]
+
+[sub_resource type="Curve2D" id="Curve2D_ulf2o"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 1151, 1, 0, 0, 0, 0, 1154, 648, 0, 0, 0, 0, 1127, 647, 0, 0, 0, 0, 1126, 0, 0, 0, 0, 0, 1151, 1)
+}
+point_count = 5
+
+[node name="Level1" type="Node"]
+script = ExtResource("1_lvmij")
+Enemy = Array[PackedScene]([ExtResource("2_yjl7h")])
+
+[node name="EnemyTimer" type="Timer" parent="."]
+wait_time = 0.5
+autostart = true
+
+[node name="PlayerMarker" type="Marker2D" parent="."]
+position = Vector2(33, 298)
+
+[node name="Tom" parent="." instance=ExtResource("2_p6h6n")]
+
+[node name="EnemySpawn" type="Path2D" parent="."]
+curve = SubResource("Curve2D_ulf2o")
+
+[node name="EnemySpawnLocation" type="PathFollow2D" parent="EnemySpawn"]
+position = Vector2(1151, 1)
+rotation = 1.56616

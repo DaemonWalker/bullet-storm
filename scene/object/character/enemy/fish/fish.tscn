@@ -1,0 +1,64 @@
+[gd_scene load_steps=10 format=3 uid="uid://ccmyesf1kwphu"]
+
+[ext_resource type="Texture2D" uid="uid://cscyw6bwwynol" path="res://art/character/enemy/fish/enemyFlyingAlt_1.png" id="1_dd2rq"]
+[ext_resource type="Script" path="res://scene/object/character/enemy/fish/Fish.cs" id="1_f7uwf"]
+[ext_resource type="Texture2D" uid="uid://dtymbnp85274m" path="res://art/character/enemy/fish/enemyFlyingAlt_2.png" id="2_uswuk"]
+[ext_resource type="Texture2D" uid="uid://kqq8xj3fkoe3" path="res://art/character/enemy/fish/enemySwimming_1.png" id="3_mnwjo"]
+[ext_resource type="Texture2D" uid="uid://cslut7r77mt5s" path="res://art/character/enemy/fish/enemySwimming_2.png" id="4_6ivcb"]
+[ext_resource type="Texture2D" uid="uid://efjbejo2owjk" path="res://art/character/enemy/fish/enemyWalking_1.png" id="5_d12nl"]
+[ext_resource type="Texture2D" uid="uid://d2im1xthoo6lv" path="res://art/character/enemy/fish/enemyWalking_2.png" id="6_r2inr"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_7bs61"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_dd2rq")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_uswuk")
+}],
+"loop": true,
+"name": &"fly",
+"speed": 2.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_mnwjo")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_6ivcb")
+}],
+"loop": true,
+"name": &"swim",
+"speed": 2.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_d12nl")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_r2inr")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 2.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_oshu0"]
+radius = 48.0
+height = 132.0
+
+[node name="Fish" type="Area2D" groups=["enemy"]]
+scale = Vector2(0.5, 0.5)
+script = ExtResource("1_f7uwf")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_7bs61")
+animation = &"walk"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_oshu0")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+position = Vector2(58, 0)

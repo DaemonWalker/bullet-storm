@@ -1,0 +1,51 @@
+[gd_scene load_steps=9 format=3 uid="uid://5k85gkqt50ga"]
+
+[ext_resource type="Script" path="res://scene/object/character/player/tom/Tom.cs" id="1_og18i"]
+[ext_resource type="PackedScene" uid="uid://drru0goxrfq71" path="res://scene/object/character/player/tom/bullet.tscn" id="2_hp0o2"]
+[ext_resource type="Texture2D" uid="uid://bjtrkxsvxhnfn" path="res://art/character/player/tom/playerGrey_up1.png" id="2_ux0b0"]
+[ext_resource type="Texture2D" uid="uid://yyvc83jkce4s" path="res://art/character/player/tom/playerGrey_up2.png" id="3_txeoe"]
+[ext_resource type="Texture2D" uid="uid://degnma7683mph" path="res://art/character/player/tom/playerGrey_walk1.png" id="4_ms5fm"]
+[ext_resource type="Texture2D" uid="uid://dxtsstil1mr8d" path="res://art/character/player/tom/playerGrey_walk2.png" id="5_o56od"]
+[ext_resource type="Script" path="res://scene/object/character/player/tom/BulletBar.cs" id="6_e3x5t"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_d0yh4"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_ux0b0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_txeoe")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_ms5fm")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_o56od")
+}],
+"loop": true,
+"name": &"default",
+"speed": 2.0
+}]
+
+[node name="Tom" type="Area2D"]
+script = ExtResource("1_og18i")
+Bullet = ExtResource("2_hp0o2")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(0.5, 0.5)
+sprite_frames = SubResource("SpriteFrames_d0yh4")
+
+[node name="BulletTimer" type="Timer" parent="."]
+wait_time = 0.5
+autostart = true
+
+[node name="BulletBar" type="ProgressBar" parent="."]
+offset_left = -26.0
+offset_top = 35.0
+offset_right = 29.0
+offset_bottom = 62.0
+script = ExtResource("6_e3x5t")
+
+[node name="BulletMarker" type="Marker2D" parent="."]
+position = Vector2(25, -5)
