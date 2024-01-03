@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://cri8ppiw1m7xh"]
+
+[ext_resource type="PackedScene" uid="uid://b48qeq2osoi3g" path="res://scene/object/character/player/player_base.tscn" id="1_v7rgc"]
+[ext_resource type="Texture2D" uid="uid://bipwmvcn4mxm5" path="res://art/icon.svg" id="2_m2fde"]
+
+[node name="Node" type="Node"]
+
+[node name="PlayerBase" parent="." instance=ExtResource("1_v7rgc")]
+AttackRange = 120.0
+
+[node name="Sprite2D" type="Sprite2D" parent="PlayerBase"]
+rotation = -0.00362891
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("2_m2fde")
