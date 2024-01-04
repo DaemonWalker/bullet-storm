@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://dcv0rkctm1tey"]
+
+[ext_resource type="Script" path="res://scene/object/character/player/dog/DogBite.cs" id="1_cpary"]
+[ext_resource type="PackedScene" uid="uid://b27yyfws3m0fx" path="res://scene/object/character/player/AttackBase.tscn" id="1_ge5m4"]
+
+[node name="DogBite" type="Node"]
+script = ExtResource("1_cpary")
+
+[node name="AttackBase" parent="." instance=ExtResource("1_ge5m4")]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="AttackBase"]
+polygon = PackedVector2Array(-19, -21, -10, 0, -6, -21, 3, -1, 9, -22, 15, -2, 22, -22, 22, 25, 15, 8, 8, 25, -1, 6, -10, 25, -17, 8, -24, 24)
+
+[node name="AffectTimer" type="Timer" parent="."]

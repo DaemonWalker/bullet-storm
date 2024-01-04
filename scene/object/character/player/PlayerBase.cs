@@ -34,7 +34,7 @@ public partial class PlayerBase : Area2D
     private CollisionShape2D attackRangeCollision;
     private List<EnemyBase> ememies = new();
 
-    public virtual float Damage
+    public virtual int Damage
     {
         get
         {
@@ -44,28 +44,31 @@ public partial class PlayerBase : Area2D
                 attack *= (150 + CriticalDamageIncr);
             }
 
-            return attack / 100f;
+            return attack / 100;
         }
     }
 
-    protected virtual void AttackEnemy()
+    protected virtual void AttackEnemy(Vector2 position)
     {
+        throw new NotImplementedException();
     }
 
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
     {
         var attackTimer = GetNode<Timer>("AttackTimer");
-        attackTimer.Timeout += () => { AttackEnemy(); };
+        attackTimer.Timeout += () => { AttackEnemy(GetEnemyInAttackRange()); };
         attackRangeCollision = GetNode<CollisionShape2D>("AttackRange");
         attackRangeCircle = attackRangeCollision.Shape as CircleShape2D;
         this.BodyEntered += (node) =>
         {
-            if (node is EnemyBase enemyBase)
+            if (node is not EnemyBase enemyBase)
             {
-                enemyBase.TreeExited += () => { this.ememies.Remove(enemyBase); };
-                this.ememies.Add(enemyBase);
+                return;
             }
+
+            enemyBase.TreeExited += () => { this.ememies.Remove(enemyBase); };
+            this.ememies.Add(enemyBase);
         };
     }
 
@@ -81,11 +84,11 @@ public partial class PlayerBase : Area2D
             return Vector2.Zero;
         }
         var enemy = ememies[GD.RandRange(0, ememies.Count)];
-        while (!enemy.IsVisibleInTree())
-        {
-            enemy = ememies[GD.RandRange(0, ememies.Count)];
-        }
-
         return enemy.Position;
+    }
+
+    protected Node GetSense()
+    {
+        return this.GetParent();
     }
 }
